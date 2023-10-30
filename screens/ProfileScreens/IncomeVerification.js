@@ -1,8 +1,8 @@
-import { View, Text,StyleSheet,TouchableOpacity } from 'react-native'
+import { View, Text,StyleSheet,TouchableOpacity,Image } from 'react-native'
 import React,{useState} from 'react'
 import { Dropdown } from 'react-native-element-dropdown';
 import { REACT_APP_BASE_URL } from "@env";
-  
+
 const data1 = [
     { label: 'House Wife', value: '1' },
     { label: 'Retired', value: '2' },
@@ -27,7 +27,6 @@ const [values1, setValues1] = useState('SELECT OCCUPATION');
 const [values2, setValues2] = useState('SELECT EMPLOYMENT STATUS');
 
  // ----------- POST API CALL -------------------
-
  const dataPost = () => {
   fetch(`${REACT_APP_BASE_URL}/IncomeVerification`, {
     method: 'POST',
@@ -53,10 +52,22 @@ const [values2, setValues2] = useState('SELECT EMPLOYMENT STATUS');
 }
 
   return (
+    
     <View>
-      <Text style={{marginTop:80,textAlign:'center',fontWeight:'bold',fontSize:28}}>Income Verification</Text>
+      <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginLeft: 0.5, marginRight: 0.5 }}>
+                <View style={{ flexDirection: 'row', padding: 15, }}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Image
+                            style={{ width: 25, height: 30, }}
+                            source={require('../../assests/images/leftArrow.png')}
+                        />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '30%' }}>RingPe</Text>
+                </View>
+            </View>
+      <Text style={{marginTop:80,textAlign:'center',fontWeight:'bold',fontSize:28,color:'black'}}>Income Verification</Text>
 
-      <View style={{ borderWidth: 2, borderRadius: 28, width: '90%', margin: 20, padding: 1, marginTop: 175 }}>
+      <View style={{ borderWidth: 2, borderRadius: 28, width: '90%', margin: 20, padding: 1, marginTop: '18%' }}>
           <Dropdown
             style={styles.dropdown}
             placeholderStyle={styles.placeholderStyle}
@@ -112,7 +123,6 @@ const [values2, setValues2] = useState('SELECT EMPLOYMENT STATUS');
 export default IncomeVerification
 
 const styles = StyleSheet.create({
-   
     button: {
       borderWidth: 2,
       borderRadius: 22,

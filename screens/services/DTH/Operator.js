@@ -6,7 +6,6 @@ const Operator = ({ navigation, route }) => {
      console.log('=imei============>', JSON.stringify(macId))
      console.log('=============>', JSON.stringify(ipId))
 
-
   return (
    <SafeAreaView>
   
@@ -37,7 +36,7 @@ const Operator = ({ navigation, route }) => {
   }
   style={{ width: '95%', height: 62,borderRadius: 20, borderWidth: 1, alignItems: 'center', justifyContent: 'center',backgroundColor: '#132fba' }}>
  
-  <Text style={{ fontSize: 22, color: 'white',padding: 2,textAlign:'center', }}>Processed</Text>
+  <Text style={{ fontSize: 20, color: 'white',padding: 2,textAlign:'center', }}>PROCEED</Text>
  
   {/* {loading ?
     (<ActivityIndicator size="large" color='white' style={{marginLeft:12}} />) : null} */}

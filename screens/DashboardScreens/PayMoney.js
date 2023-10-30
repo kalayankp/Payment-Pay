@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, TextInput, TouchableOpacity, Image, SafeAreaView, Dimensions, Keyboard, Alert } from 'react-native'
+import { REACT_APP_BASE_URL } from "@env";
 
 const PayMoney = ({ navigation }) => {
   let countryCode = '+91'
   const [active, setActive] = useState(false)
   const [senderMobNo, setSenderMobNo] = useState()
   const [money, setMoney] = useState('0')
-
-
+  
   const SendMoney = () => {
-    fetch('http://192.168.1.49:7000/bills/walletToWalletTransfer', {
+    fetch(`${REACT_APP_BASE_URL}/walletToWalletTransfer`, {
       method: 'POST',
       body: JSON.stringify({
-        'mobile': senderMobNo,
+        'mobile': senderMobNo, 
         "amount": money 
       }),
       headers: {
@@ -68,14 +68,17 @@ const PayMoney = ({ navigation }) => {
 
           <View style={{ flexDirection: 'row', marginTop: 10, borderBottomWidth: 2, borderColor: 'black' }}>
             <Text style={{ fontSize: 28, marginTop: 8, color: 'black' }}>{countryCode}</Text>
-            <TextInput placeholder='9876543210' placeholderTextColor="grey" onChangeText={(e) => { setSenderMobNo(e) }} keyboardType="numeric" maxLength={10} style={{ fontSize: 26, borderWidth: 0, width: 210, marginLeft: 8, color: 'black' }} />
+            <TextInput placeholder='9876543210' placeholderTextColor="grey" onChangeText={(e) => { setSenderMobNo(e) }} keyboardType="numeric" maxLength={10} style={{ fontSize: 26, borderWidth: 0,  marginLeft: 8, color: 'black',width:'100%' }} />
           </View>
+          
           <Text style={{ fontSize: 20, padding: 8, fontWeight: 'bold', color: 'black', marginTop: 20, color: 'black' }}> Enter Amount </ Text>
+          
           <View style={{ flexDirection: 'row', marginTop: 10, borderBottomWidth: 2, borderColor: 'black' }}>
             <Text style={{ fontSize: 28, marginTop: 6, color: 'black' }}>{'\u20B9'}</Text>
-            <TextInput placeholder='1000' placeholderTextColor='grey' onChangeText={(e) => { setMoney(e) }} keyboardType="numeric" maxLength={10} style={{ fontSize: 23, borderWidth: 0, width: 120, marginTop: 2, marginLeft: 10, color: 'black' }} />
+            <TextInput placeholder='1000' placeholderTextColor='grey' onChangeText={(e) => { setMoney(e) }} keyboardType="numeric" maxLength={10} style={{ fontSize: 23, borderWidth: 0, width: 120, marginTop: 2, marginLeft: 10, color: 'black',width:'100%' }} />
           </View>
         </View>
+
         <View stylele={{ margin: 10 }}>
           <Image source={require('../../assests/icons/ringpeIcons.png')} style={{ width: '100%', height: 122, marginTop: "10%", }} />
         </View>

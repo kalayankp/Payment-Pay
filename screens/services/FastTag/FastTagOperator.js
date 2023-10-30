@@ -1,22 +1,24 @@
 
 import React, { useState, useEffect } from 'react'
-
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native'
+import { REACT_APP_BASE_Bill_URL } from "@env";
 
-
-const FastTagOperator = ({ navigation, route }) => {
+const FastTagOperator = ({ navigation,route}) => {
+  const {macId,ipId} = route.params;
+  console.log('----',JSON.stringify(macId),JSON.stringify(ipId));
   const [biller_ids, setBiller_ids] = useState('');
   const [operator, setOperator] = useState('')
   const [selectOperator,setSelectOperator]=useState('')
-  //1121 
+  //1121  
   console.log(biller_ids);
+
   const getData = () => {
-    fetch('http://192.168.1.49:7000/bills/getElectricityBillers')
+    fetch(`${REACT_APP_BASE_Bill_URL}/getFastagBillers`)
       .then(res => res.json())
       .then(data =>
         //console.log(data),
         setOperator(data.data)
-      )
+      ) 
   }
   
   useEffect(() => {
@@ -33,47 +35,47 @@ const FastTagOperator = ({ navigation, route }) => {
               source={require('../../../assests/images/leftArrow.png')}
             />
           </TouchableOpacity>
-          <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '30%' }}>RingPe</Text>
+          <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '30%' }}>FastTag</Text>
         </View>
       </View>
-   
-      <View style={{ width: '100%', height: '5%', backgroundColor: '#E8E8E8' }}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold', color: "black", padding: 5 }}>Electricity Bill </Text>
-      </View>
-         {/* search bar */}
-      <View>
-        {/* <View style={{ marginTop: '3%', justifyContent: "center", margin: 10, alignItems: 'center', borderWidth: 2, width: '90%', borderRadius: 20, borderColor: 'black', flexDirection: 'row', justifyContent: 'space-around' }}>
-          <TextInput placeholder='Search Biller Name' style={{ fontSize: 20, padding: 10, color: "black" }} />
-          <Image source={require('../../assests/icons/images/zoom.png')} style={{ width: 22, height: 18, }} />
-        </View> */}
-        {/* <View style={{ width: '100%', height: '6%', backgroundColor: '#E8E8E8' }}>
-        </View>  */}
-        </View>
-        <View style={{}}>
-          <View style={{}}>
-            <Text style={{ marginTop: '1%', fontSize: 20, color: 'black', padding: 10, fontWeight: "500" }}>All Billers</Text>
-          </View>
-        </View>
      
-      <View style={{marginTop:'-12%',backgroundColor:'#E8E8E8'}}>
+      <View style={{ width: '100%',  backgroundColor: '#E8E8E8',}}>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', color: "black", padding: 8,}}>FastTag </Text>
+      </View>
+         {/* search bar */} 
+      <View>
+        <View style={{ marginTop: '3%', justifyContent: "center", margin: 10, alignItems: 'center', borderWidth: 2, width: '90%', borderRadius: 20, borderColor: 'black', flexDirection: 'row', justifyContent: 'space-around', }}>
+          <TextInput placeholder='Search Bank Name' style={{ fontSize: 20, padding: 10, color: "black" }} />
+          <Image source={require('../../../assests/icons/images/zoom.png')} style={{ width: 22, height: 18, }} />
+        </View>
+        <View style={{ width: '100%', height: '1%', backgroundColor: '#E8E8E8' }}>
+        </View> 
+        </View> 
+        
+          <View style={{}}>
+            <Text style={{ marginTop: '0%', fontSize: 20, color: 'black', padding: 10, fontWeight: "500" }}>All Banks</Text>
+          </View>
+      <View style={{backgroundColor:'#E8E8E8',}}>
       <FlatList
         data={operator}
         setSelectOperator
         renderItem={({ item }) => (
-          <View style={{marginTop:'3%',borderColor:'grey',backgroundColor:'white'}}>
+          <View style={{marginTop:'1%',borderColor:'grey',backgroundColor:'white'}}>
            <TouchableOpacity onPress={()=>{
             setSelectOperator(item.biller_name)
             setBiller_ids(item.biller_id)
-            navigation.navigate('ElectricityForm',{
+            navigation.navigate('FastTagForm',{
                 "biilerId":item.biller_id,
-                'billerName':item.biller_name
-            })
-           }}>
+                'billerName':item.biller_name,
+                macId:macId,
+                ipId:ipId
+            }) 
+           }}> 
             <Text style={{color:'black',padding:'5%',fontSize:20}}>{item.biller_name}</Text>
             </TouchableOpacity>
           </View>
-        )}
-      />
+        )}  
+      /> 
       </View>
       {/* <TouchableOpacity
           style={{ width: '80%', height: 62, marginTop: 112, padding: 10, borderRadius: 20, borderWidth: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#3f46c8' }}>

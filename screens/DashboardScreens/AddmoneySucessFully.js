@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { Text, View, StyleSheet,TouchableOpacity,Image } from 'react-native';
+import { Text, View, StyleSheet,TouchableOpacity,Image,SafeAreaView } from 'react-native';
 
 export default function AddmoneySucessFully({ navigation, route }) {
     const [updatedData,setUpdatedData]=useState()
@@ -12,6 +12,7 @@ export default function AddmoneySucessFully({ navigation, route }) {
         }
       }, [route.params?.data]);
   return (
+    <SafeAreaView>
     <View  style={{flex:1,justifyContent:'center',padding:42}}>
        
       <View>
@@ -28,7 +29,7 @@ export default function AddmoneySucessFully({ navigation, route }) {
           height: 108,
         }}
       /> */}
-      </View>
+      </View> 
       </View>
     <TouchableOpacity 
      onPress={() => {
@@ -42,6 +43,7 @@ export default function AddmoneySucessFully({ navigation, route }) {
       <Text style={{fontSize:25,textAlign:'center',color:'black'}}> Return Home</Text>
     </TouchableOpacity>
     </View>
+    </SafeAreaView>
   );
 }
 

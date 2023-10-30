@@ -2,7 +2,6 @@ import { View, Text,StyleSheet,SafeAreaView,TouchableOpacity,Image } from 'react
 import React,{useState} from 'react'
 import Slider from '@react-native-community/slider';
 
-
 const EnableUsageCap = ({navigation}) => {
     const [sliderValue, setSliderValue] = useState(15);
     

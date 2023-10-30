@@ -45,15 +45,11 @@ const ForgetPassword = () => {
       <Text style={{marginTop:80,textAlign:'center',fontWeight:'bold',fontSize:28,color:'black'}}>Forget Password</Text>
 
         <View style={{marginTop:10,borderWidth:2,borderColor:'grey',marginTop:122,borderRadius:20,margin:22,justifyContent:'center'}}>
- 
          <TextInput placeholder='New Password' onChangeText={(e)=>{setData(e)}} keyboardType="numeric" maxLength={16} style={{fontSize:26,borderWidth: 0,width:210,textAlign:'center'}}/>
         </View>
         <View style={{marginTop:10,borderWidth:2,borderColor:'grey',borderRadius:20,margin:22,justifyContent:'center'}}>
- 
-         <TextInput placeholder='RE-Enter Password' onChangeText={(e)=>{setData(e)}} keyboardType="numeric" maxLength={26} style={{fontSize:26,borderWidth: 0,width:260,textAlign:'center'}}/>
+          <TextInput placeholder='RE-Enter Password' onChangeText={(e)=>{setData(e)}} keyboardType="numeric" maxLength={26} style={{fontSize:26,borderWidth: 0,width:260,textAlign:'center'}}/>
         </View>
-
-       
 
         <View style={{justifyContent:'center',alignItems:"center"}}>
         <TouchableOpacity

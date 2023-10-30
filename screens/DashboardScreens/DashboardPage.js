@@ -8,7 +8,7 @@ const DashboardPage = ({ navigation, route }) => {
   const macAdd = DeviceInfo.getMacAddressSync();
   const ipAd = DeviceInfo.getIpAddressSync()
   const imei = DeviceInfo.getPhoneNumber()
-
+ 
   console.log('imei---', imei)
 
   const update = route.params?.data
@@ -33,6 +33,7 @@ const DashboardPage = ({ navigation, route }) => {
           <TouchableOpacity>
             <Image source={require('../../assests/icons/ringpeIcons.png')} style={{ width: 142, height: 122, marginTop: -24, marginRight: -58, }} />
           </TouchableOpacity>
+          
           <View style={{ flexDirection: 'row', }}>
             <TouchableOpacity
               onPress={() => { Linking.openURL('https://gmail.com/') }}
@@ -58,9 +59,11 @@ const DashboardPage = ({ navigation, route }) => {
             <Text style={{ fontWeight: '400', fontSize: 16, color: 'white' }}> SEND </Text>
           </TouchableOpacity>
         </View>
+
         <ScrollView showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false} style={{ backgroundColor: 'white', borderWidth: 1.1, borderRadius: 31, width: '107%', marginLeft: -14, padding: 8, borderTopColor: "#3f46c8", }}>
           {/* -------------------------------------------- */}
+
           <View style={{ position: 'relative', zIndex: -1 }}>
             <View style={styles.card}>
               <TouchableOpacity onPress={() => {
@@ -70,21 +73,27 @@ const DashboardPage = ({ navigation, route }) => {
                   'imei': imei
                 })
               }}>
-                <Image source={require('../../assests/icons/images/postpaid.png')} style={{ width: 42, height: 42 }} />
-                <Text style={{ color: 'black', }}>Prepaid</Text>
-              </TouchableOpacity>
+                <Image source={require('../../assests/icons/images/prepaid.png')} style={{ width: 25, height: 42 }} />
+                <Text style={{ color: 'black',marginLeft:-10 }}>Prepaid</Text>
+              </TouchableOpacity> 
 
               <TouchableOpacity onPress={() => {
                 navigation.navigate('PostpaidMobile', {
                   'macId': macAdd,
                   'ipId': ipAd,
                   'imei': imei
-                })
+                }) 
               }}>
-                <Image source={require('../../assests/icons/images/postpaid.png')} style={{ width: 42, height: 42, }} />
-                <Text style={{ marginLeft: 4, color: 'black', marginLeft: -7 }}>postpaid</Text>
+                <Image source={require('../../assests/icons/images/postpaid.png')} style={{ width: 42, height: 42, marginLeft:5}} />
+                <Text style={{  color: 'black',  }}>Postpaid</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { navigation.navigate('BroadBandScreen') }}>
+              <TouchableOpacity onPress={() => {
+                navigation.navigate('BroadBandOperator', {
+                  'macId': macAdd,
+                  'ipId': ipAd,
+                  'imei': imei
+                }) 
+              }}>
                 <Image source={require('../../assests/icons/images/broadband.png')} style={{ width: 42, height: 42 }} />
                 <Text style={{ marginLeft: -11, color: 'black' }}>Broadband</Text>
               </TouchableOpacity>
@@ -95,30 +104,59 @@ const DashboardPage = ({ navigation, route }) => {
                   'imei': imei
                 })
               }}>
-                <Image source={require('../../assests/icons/images/Dth.png')} style={{ width: 42, height: 42 }} />
-                <Text style={{ color: 'black' }}> DTH</Text>
+                <Image source={require('../../assests/icons/images/Dth.png')} style={{ width: 30, height: 40 }} />
+                <Text style={{ color: 'black'}}>DTH </Text>
               </TouchableOpacity>
             </View>
+
             {/* ---------------------------- */}
+
             <View style={styles.card}>
-              <TouchableOpacity>
-                <Image source={require('../../assests/icons/water.png')} style={{ width: 42, height: 42 }} />
+              <TouchableOpacity onPress={() => {
+                navigation.navigate('WaterBillOperator', {
+                  'macId': macAdd,
+                  'ipId': ipAd,
+                  'imei': imei
+                })
+              }}>  
+
+                <Image source={require('../../assests/icons/water.png')}  style={{ width: 42, height: 42 }} />
                 <Text style={{ color: 'black' }}> Water</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { navigation.navigate('GasBill') }}>
+              <TouchableOpacity onPress={() => { navigation.navigate('Gasoperator',{
+                  'macId': macAdd,
+                  'ipId': ipAd,
+                  'imei': imei
+                })
+              }}>
+
                 <Image source={require('../../assests/icons/images/gas-tank.png')} style={{ width: 42, height: 42, marginLeft: 12 }} />
-                <Text style={{ marginLeft: -1, color: 'black' }}>   Gas Bill</Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image source={require('../../assests/icons/images/gas-pipe.png')} style={{ width: 42, height: 42 }} />
-                <Text style={{ color: 'black' }}>Gas Pipe </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => { navigation.navigate('ElectricityBill') }} >
+                <Text style={{ marginLeft: 10, color: 'black' }}>Gas Bill</Text>
+                </TouchableOpacity>
+  
+              <TouchableOpacity onPress={() => { navigation.navigate('ElectricityBill',{
+                 'macId': macAdd,
+                 'ipId': ipAd,
+                 'imei': imei
+              }) }}>
                 <Image source={require('../../assests/icons/images/electricity.png')} style={{ width: 42, height: 42, marginLeft: 12 }} />
-                <Text style={{ marginLeft: -5, color: 'black' }}>  Electricity</Text>
+                <Text style={{  color: 'black' }}> Electricity</Text>
               </TouchableOpacity>
+    
+              <TouchableOpacity onPress={() => {
+                navigation.navigate('CreditCardOperator', {
+                  'macId': macAdd,
+                  'ipId': ipAd,
+                  'imei': imei
+                })
+              }}>
+                <Image source={require('../../assests/icons/images/card.png')} style={{ width: 42, height: 42,marginLeft:3 }} />
+                <Text style={{ color: 'black' }}>Card Bill </Text>
+              </TouchableOpacity>
+              
             </View>
             {/* --------------------------------------------- */}
+
             <View style={styles.card}>
               <TouchableOpacity onPress={() => { navigation.navigate('FlightBook') }} >
                 <Image source={require('../../assests/icons/images/take-off.png')} style={{ width: 42, height: 28, marginTop: 10 }} />
@@ -126,9 +164,13 @@ const DashboardPage = ({ navigation, route }) => {
               </TouchableOpacity>
               <TouchableOpacity onPress={() => { navigation.navigate('BusBook') }}>
                 <Image source={require('../../assests/icons/images/bus.png')} style={{ width: 42, height: 42, }} />
-                <Text style={{ color: 'black' }}>  BUS</Text>
+                <Text style={{ color: 'black', }}>   Bus  </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { navigation.navigate('FastTagOperator') }}>
+              <TouchableOpacity onPress={() => { navigation.navigate('FastTagOperator', {
+                  'macId': macAdd,
+                  'ipId': ipAd,
+                  'imei': imei
+                }) }}> 
                 <Image source={require('../../assests/icons/images/toll.png')} style={{ width: 42, height: 42, marginLeft: 12 }} />
                 <Text style={{ color: 'black' }}> Fast Tag</Text>
               </TouchableOpacity>
@@ -141,7 +183,7 @@ const DashboardPage = ({ navigation, route }) => {
             <View style={styles.card}>
               <TouchableOpacity>
                 <Image source={require('../../assests/icons/images/bank.png')} style={{ width: 42, height: 42 }} />
-                <Text style={{ color: 'black' }}> Bank</Text>
+                <Text style={{ color: 'black' }}>  Bank</Text>
               </TouchableOpacity>
               <TouchableOpacity>
                 <Image source={require('../../assests/icons/images/bank-statement.png')} style={{ width: 38, height: 42, marginLeft: 10 }} />
@@ -164,7 +206,6 @@ const DashboardPage = ({ navigation, route }) => {
             </View>
           </View>
         </ScrollView>
-
       </LinearGradient>
     </View>
 

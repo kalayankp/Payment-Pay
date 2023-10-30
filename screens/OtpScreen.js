@@ -11,10 +11,9 @@ import RNOtpVerify from 'react-native-otp-verify';
 import LinearGradient from 'react-native-linear-gradient';
 import { REACT_APP_BASE_URL } from "@env"
 const CELL_COUNT = 4;
-
 const OtpScreen = ({ navigation, route }) => {
-  const [value, setValue] = useState();
 
+  const [value, setValue] = useState();
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -29,7 +28,7 @@ const OtpScreen = ({ navigation, route }) => {
   // const [statuss,setStatuss]  = useState('')
   // const [errOtp,seterrOtp]  = useState('')
   const [panValue, setPanValue] = useState('')
-
+const upperCasePanValue=panValue.toUpperCase();
   //-------Getting  ID-------------------------
 
   const { itemId } = route.params;
@@ -131,7 +130,7 @@ const OtpScreen = ({ navigation, route }) => {
       method: 'POST',
       body: JSON.stringify({
         "id": newId,
-        "PAN": panValue
+        "PAN": upperCasePanValue
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -157,12 +156,14 @@ const OtpScreen = ({ navigation, route }) => {
         console.log("----", err.message);
       });
   };
+
   const register = () => {
-    PanCardData()
+    PanCardData()  
     console.log(panValue);
   }
 
   return (
+
     <View>
       <LinearGradient
         colors={['white', 'white',]}
@@ -183,7 +184,7 @@ const OtpScreen = ({ navigation, route }) => {
             keyboardType="number-pad"
             textContentType="oneTimeCode"
             renderCell={({ index, symbol, isFocused }) => (
-
+    
               <View
                 onLayout={getCellOnLayoutHandler(index)}
                 key={index}
@@ -228,17 +229,19 @@ const OtpScreen = ({ navigation, route }) => {
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                   <Text style={styles.modalText}>Enter PAN NO</Text>
-                  <TextInput placeholder='XXXXXXXX'
+                  
+                  <TextInput placeholder='XXXXXXXXX'
                     onChangeText={(panValue) => setPanValue(panValue)}
                     maxLength={10} placeholderTextColor="grey" autoCapitalize={"characters"}
                     style={{
-                      fontSize: 24, margin: 29, borderWidth: 1, borderRadius: 10, width: '70%',
-                      justifyContent: 'center', alignItems: 'center', textAlign: 'center', color: 'black'
-                    }} />
+                      fontSize: 24, marginTop:'10%', borderWidth: 1, borderRadius: 10,
+                       textAlign: 'center', color: 'black'
+                    }}/>
+
                   <TouchableOpacity
                     style={[styles.buttons, styles.buttonClose]}
                     onPress={register}>
-                    <Text style={styles.textStyle}>Processed</Text>
+                    <Text style={styles.textStyle}>PROCEED</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -248,19 +251,19 @@ const OtpScreen = ({ navigation, route }) => {
 
             <TouchableOpacity
               style={[styles.buttonStyle, styles.buttonOpen]}
-
               onPress={() => { OtpValidate() }}>
-
               <Text style={styles.buttonTextStyle}>
                 Verify OTP
               </Text>
             </TouchableOpacity>
           </View>
+
           {/* <TouchableOpacity
             style={[styles.buttons, styles.buttonClose]}
             onPress={() => callLocalData()}>
             <Text style={styles.textStyle}>GEtDATA FROM LOCAL</Text>
           </TouchableOpacity> */}
+
         </SafeAreaView>
       </LinearGradient>
     </View>
@@ -271,7 +274,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     padding: 20,
-
     marginTop: -10,
   },
   logo: {
@@ -313,21 +315,20 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     fontSize: 26,
-    width: '120%',
+    width: '100%',
     color: 'white',
     backgroundColor: '#3f46c8',
-    top: '42%',
+    top: '20%',
     borderColor: 'white',
     padding: 5,
     borderRadius: 22,
-
   },
   buttonTextStyle: {
-    fontWeight: 'bold',
+    fontWeight: '400',
     height: 53,
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 25,
+    fontSize: 20, 
     color: 'white',
     textAlign: 'center',
     paddingTop: 10,
@@ -338,7 +339,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 1,
-
   },
   modalView: {
     margin: 20,
@@ -363,32 +363,31 @@ const styles = StyleSheet.create({
   buttons: {
     borderWidth: 1,
     borderRadius: 22,
-    padding: 10,
-    fontSize: 25,
+    padding: 3,
+    fontSize: 20,
     elevation: 6,
-    width: '100%',
-    marginTop: -222,
-    heigth: 122,
+    width: '80%',
+    marginTop: '30%',
+    
   },
   buttonOpen: {
     backgroundColor: '#3f46c8',
-
   },
   buttonClose: {
     marginTop: '40%',
     backgroundColor: '#3f46c8',
     borderRadius: 9,
-    height: '13%',
+    height: '10%',
     alignItems: 'center',
     justifyContent: 'center'
   },
   textStyle: {
     color: 'white',
-    fontWeight: 'bold',
+    fontWeight: '400',
     textAlign: 'center',
-    fontSize: 22,
-    width: 122,
-  },
+    fontSize: 20,
+   
+  }, 
   modalText: {
     marginTop: 45,
     textAlign: 'center',

@@ -2,6 +2,7 @@ import { View, Text,TextInput,TouchableOpacity,StyleSheet } from 'react-native'
 import React from 'react'
 
 const ChangeTpin = () => {
+ 
   return (
     <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
          <Text style={{marginTop:10,textAlign:'center',fontWeight:'bold',fontSize:28}}>CHANGE TPIN</Text>
@@ -13,7 +14,6 @@ const ChangeTpin = () => {
         <View style={{marginTop:10,borderWidth:2,borderColor:'grey',borderRadius:20,margin:22,justifyContent:'center'}}>
           <TextInput placeholder='RE-Enter NEW TPIN' onChangeText={(e)=>{setData(e)}} keyboardType="numeric" maxLength={16} style={{fontSize:20,borderWidth: 0,width:310,textAlign:'center'}}/>
         </View>
-
         <View style={{marginTop:10,borderWidth:2,borderColor:'grey',borderRadius:20,margin:22,justifyContent:'center'}}>
          <TextInput placeholder='CHOOSE SECURITY QUESTION' onChangeText={(e)=>{setData(e)}} keyboardType="numeric" maxLength={16} style={{fontSize:20,borderWidth: 0,width:310,textAlign:'center'}}/>
         </View>

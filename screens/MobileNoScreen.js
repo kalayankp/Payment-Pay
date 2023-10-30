@@ -1,7 +1,6 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { StyleSheet, SafeAreaView, Text, View, Image, Button, TextInput, Linking, TouchableOpacity, Alert,Keyboard } from 'react-native';
-  
 import { REACT_APP_BASE_URL } from "@env"
 
 export default function MobileNoScreen({ navigation }) {
@@ -18,34 +17,38 @@ export default function MobileNoScreen({ navigation }) {
   const maxLength = 10; 
   
   const getDataUsingPost = () => {
- 
-    fetch(`${REACT_APP_BASE_URL}/registerMobile`, {
+   fetch('http://3.108.203.122:7000/users/registerMobile',{
+  //  fetch(`${REACT_APP_BASE_URL}/registerMobile`, {
       method: 'POST',
       body: JSON.stringify({
         "mobile": username
       }),
-      headers: {
-        'Content-Type': 'application/json',
+       headers: { 
+        'Content-Type': 'application/json', 
       },
-    })   
+    })
       .then((response) => response.json())
       .then((data) => {
         let otp = data.data.OTP;
-        let newOTP = otp.toString();
+        let newOTP = otp?.toString();
         console.log(newOTP);
         let newTok = data.id
         let nTok = newTok
         if (data.status === true && username.length == maxLength){
           navigation.navigate('OtpScreen', {
             'itemId': nTok
-          })  
-        }
+          }) 
+          Alert.alert('OTP is', newOTP, [
+            { text: 'OK' },
+          ]);
+        } else{
+          alert(data.message)
+        } 
+        
         // console.log('nToken is---',token);
         // console.log('nToken is--->>',nTok);
 
-        Alert.alert('OTP is', newOTP, [
-          { text: 'OK' },
-        ]);
+       
       })
       .catch((err) => {
         alert(err.message)
@@ -79,6 +82,7 @@ export default function MobileNoScreen({ navigation }) {
   return (
   <SafeAreaView>
       <View style={styles.container}> 
+      
         <Image style={styles.logo} source={require('../assests/icons/ringpeIcons.png')} />
         <Text
           style={{
@@ -91,8 +95,8 @@ export default function MobileNoScreen({ navigation }) {
           Enter your mobile number
         </Text>
 
-        <View style={{ flexDirection: 'row', borderWidth: 3, borderColor: 'black', borderRadius: 22, marginTop: "1%", margin: 12 }}>
-          <Text style={{ margin: 10, fontSize: 20, color: 'black' }}>{code}</Text>
+        <View style={{ flexDirection: 'row', borderWidth: 3, borderColor: 'black', borderRadius: 22, marginTop: "1%", margin: 15 }}>
+          <Text style={{ margin: 10, fontSize: 20, color: 'black' }}> {code}</Text>
           <TextInput onChangeText={handleTextChange} placeholder="10 Digit Mobile No" placeholderTextColor="black" keyboardType="numeric" maxLength={maxLength} style={styles.textInputStyle} />
         </View>
 
@@ -110,7 +114,7 @@ export default function MobileNoScreen({ navigation }) {
 
           <TouchableOpacity onPress={onSubmit}
             style={styles.button}>
-            <Text style={styles.buttonText}>Processed</Text>
+            <Text style={styles.buttonText}>PROCEED</Text>
           </TouchableOpacity>
         </View>
         <View style={{ marginTop: 21 }}></View>
@@ -127,8 +131,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginTop: -28,
-    width: 240,
-    height: 210,
+    width: 140,
+    height: 110,
     marginLeft: -32,
   },
   linearGradient: {
@@ -158,7 +162,6 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     fontSize: 24,
-
     height: 50,
     width: '90%',
 
@@ -170,7 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     borderColor: '#3f46c8',
     height: 58,
-    width: '90%',
+    width: '85%',
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     justifyContent: 'center',
@@ -179,8 +182,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    fontSize: 22,
-    color: 'lightgrey',
+    fontSize: 20,
+    color: 'white',
     fontWeight: '12',
   }
 });

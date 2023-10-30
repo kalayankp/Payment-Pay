@@ -9,4 +9,4 @@ const TrasactionScreen = () => {
   )
 }
  
-export default TrasactionScreen 
+export default TrasactionScreen  

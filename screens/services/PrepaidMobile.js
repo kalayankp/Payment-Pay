@@ -11,14 +11,12 @@ import {View,Text,TextInput,TouchableOpacity,StyleSheet} from 'react-native'
   ];
 const PrepaidMobile=({ navigation, route })=>{
   let countryCode= '+91'
-
-
   const [value, setValue] = useState(null);
+
   return(
     <View style={{padding:20,marginTop:'10%',}}>
       <Text style={{fontSize:22,fontWeight:'bold',textAlign:'center',color:'black'}}>PREPAID MOBILE RECHARGE</ Text>
-
-   <View style={{marginTop:'20%'}}>
+    <View style={{marginTop:'20%'}}>
       <Text style={{fontSize:22,padding:8,fontWeight:'bold',color:'black',marginTop:20}}> Enter Mobile No </ Text>
      
       <View style={{flexDirection:'row',marginTop:10,borderBottomWidth:2,borderColor:'black'}}>

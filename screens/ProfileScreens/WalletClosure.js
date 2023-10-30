@@ -10,7 +10,7 @@ const data = [
   ];
 const WalletClosure = () => {
     
-
+ 
   const [values, setValues] = useState('SELECT');
   console.log('--',values)
   return (

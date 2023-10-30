@@ -8,8 +8,8 @@
 //  }) => {
 //   const handleLoginPress = () => {
 //     navigation.navigate('Home')
- 
 //   };
+
 //   const [emailid, setEmailId] = useState('');
 //   const [error, setError] = useState(null);
 
@@ -26,7 +26,6 @@
 //   const onSubmit = async () => {
 //     goBack()
 //   }
-
 //   // const handleRegister = async () => {
 
 

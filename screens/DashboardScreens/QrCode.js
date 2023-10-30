@@ -6,7 +6,7 @@ const QrCode = () => {
     <View>
       <View style={{ borderWidth: 4, borderRadius: 52, height: 65, width: 65, margin: 25, alignItems: 'center', justifyContent: 'center', borderColor: '#DD7D5D' }}>
        
-      </View>
+      </View> 
     </View>
   )
 } 

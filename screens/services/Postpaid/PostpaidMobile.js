@@ -3,11 +3,11 @@ import { ScrollView } from 'react-native';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, FlatList, ActivityIndicator, Modal, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { REACT_APP_BASE_Bill_URL } from "@env";
 // const data = [
 //   { values: 'Airtel', biller_id: '1' },
 //   { values: 'BSNL', biller_id: '2' },
-//   { values: 'Airtel', biller_id: '1' },
+//   { values: 'Airtel', biller_id: '1' }, 
 //   { values: 'BSNL', biller_id: '2' },
 //   { values: 'Airtel', biller_id: '1' },
 //   { values: 'BSNL', biller_id: '2' },
@@ -37,21 +37,20 @@ let ipIDis=ipId
   const [errors, setErrors] = useState() 
   
   console.log('mobileNo is-----',mobileNo.length);
-
+ 
   // GET API for fetching all Operators
 
   const Data = () => {
-
-    fetch('http://192.168.1.5:7000/bills/getMobilePostpaidOperators')
+ 
+    fetch(`${REACT_APP_BASE_Bill_URL}/getMobilePostpaidOperators`)
       .then((response) => response.json())
       .then((data) => {
-
         const newData = data 
         setPostpaidValue(newData.data)
         setLoading(false);
       })
       .catch((err) => {
-        alert(err.message)
+      //  alert(err.message)
         console.log(err.message);
       })
   };
@@ -64,7 +63,7 @@ let ipIDis=ipId
 
   const postUserData = () => {
     setLoading(true)
-    fetch("http://192.168.1.5:7000/bills/fetchBills", {
+    fetch(`${REACT_APP_BASE_Bill_URL}/fetchBills`, {
       method: 'POST', 
       body: JSON.stringify({ 
         mobile: mobileNo,
@@ -79,20 +78,14 @@ let ipIDis=ipId
       .then((response) => response.json())
       .then((data) => {
         setLoading(false)
-        console.log('resp is ----', data.data.result.payload);
+       // console.log('resp is ----', data.data.result.payload);
         console.log('status is ----', data.status);
         setStatuss(data.status)
-        setErrors(data.message)
+        setErrors(data.message) 
         if (data.status === true) {
           const incomingData = data.data.result.payload
           console.log('bill data is--', incomingData.refId);
-          // setBiller_name(incomingData.accountHolderName)
-          // setBillerAccountNo(incomingData.billNumber)
-          // setBillerTotalAmount(incomingData.amount)
-          // setBillDate(incomingData.billDate)
-          // setDueDate(incomingData.dueDate)
-          // setRefId(incomingData.refId)
-          setLoading(false)
+          setLoading(false) 
 
           navigation.navigate("UserBill", {
             'ipID': ipIDis,
@@ -105,13 +98,15 @@ let ipIDis=ipId
             'billerTotalAmount':incomingData.amount,
             'billerAccountNo':incomingData.billNumber,
             'refId':incomingData.refId,
+            'name':'PostPaid'
           }) 
-        } else {
-          alert(errors)
+        } else { 
+          alert(data.message)
+ 
         }
       })
       .catch((err) => {
-        alert(err.message)
+     //   alert(err.message)
         console.log(err.message);
       })
   };
@@ -122,15 +117,14 @@ let ipIDis=ipId
 
   //     if (mobileNo.length === 10) {
   //       setLoading(true)
-  //       setModalVisible(true)
+  //       setModalVisible(true)  
       
   //       setLoading(false)
   //     } else {
   //       setModalVisible(false)
   //       alert(errors)
-  //     } 
+  //     }
   //   }, 0)
-
   // }
   console.log('ipadd', ipId);
   console.log('macid', macId);
@@ -161,10 +155,10 @@ let ipIDis=ipId
         <Text style={{ fontSize: 20, padding: 8, fontWeight: '400', color: 'black', marginTop: '1%', marginBottom: -13 }}> Enter Mobile No </ Text>
         <View style={{ flexDirection: 'row', marginTop: 10, borderBottomWidth: 1, borderColor: 'black' }}>
           <Text style={{ fontSize: 26, marginTop: 14, color: 'black' }}>{countryCode}</Text>
-          <TextInput placeholder='0000000000' onChangeText={(text) => {setMobileNo(text) }} keyboardType="numeric" maxLength={10} style={{ fontSize: 24, borderWidth: 0, width: 210, marginLeft: 4, marginTop: 5, color: 'black' }} />
+          <TextInput placeholder='0000000000' onChangeText={(text) => {setMobileNo(text) }} keyboardType="numeric" maxLength={10} style={{ fontSize: 24, borderWidth: 0, width:'100%', marginLeft: 4, marginTop: 5, color: 'black' }} />
         </View>
       </View>
-      <View style={{}}>
+      <View style={{}}> 
         <View style={{}}>
           {operatorValue === 'Select Operator'
             ? <Text style={{ fontSize: 20, padding: 8, fontWeight: 'bold', color: 'black', marginTop: 15, width: '100%', borderBottomWidth: 1 }}> {operatorValue}</ Text>
@@ -210,8 +204,8 @@ let ipIDis=ipId
           onPress={() => {postUserData()}
           }
           style={{ width: '95%', height: 62, marginTop: '-28%',  borderRadius: 20, borderWidth: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', backgroundColor: '#132fba' }}>
-         
-          <Text style={{ fontSize: 22, color: 'white',padding: 2,textAlign:'center', }}>Processed</Text>
+          
+          <Text style={{ fontSize: 20, color: 'white',padding: 2,textAlign:'center', }}>PROCEED</Text>
          
           {loading ?
             (<ActivityIndicator size="large" color='white' style={{marginLeft:12}} />) : null}

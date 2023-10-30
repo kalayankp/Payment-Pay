@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
   // ----------- POST API CALL -------------------
   //live server: http://13.233.224.129:7000/users/login
     
-  const dataPosts = () => {
+  const dataPosts = () => { 
      fetch(`${REACT_APP_BASE_URL}/login`, {  
      // fetch('http://192.168.1.32:7000/users/login',{
       method: 'POST',  
@@ -40,7 +40,10 @@ const LoginScreen = ({ navigation }) => {
         'Content-Type': 'application/json',
       },
     })  
-      .then((response) => response.json())
+      .then((response) =>  
+     // console.log(response)
+      response.json()
+      )
       .then((data) => {
         if (data.status === true) {
           handleSubmitPress()
@@ -89,19 +92,16 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.mainBody}>
-      <Image
+      {/* <Image
         style={styles.logo}
         source={require('../assests/icons/ringpeIcons.png')}
-      />
+      /> */}
       <Loader loading={loading} />
       <View
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
-          flex: 1,
-          justifyContent: 'center',
-          alignContent: 'center',
-          marginTop: -122,
-        }}>
+          marginTop:'80%'
+       }}>
         <View>
           <KeyboardAvoidingView enabled>
             <View style={{ alignItems: 'center' }}>
@@ -180,8 +180,8 @@ const styles = StyleSheet.create({
   mainBody: {
     flex: 1,
     justifyContent: 'center',
-
     alignContent: 'center',
+    backgroundColor:'white'
   },
   SectionStyle: {
     flexDirection: 'row',
@@ -199,21 +199,21 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginTop: -62,
-    width: 240,
-    height: 220,
-    marginLeft: -2,
+    width: 145,
+    height: 145,
+  marginLeft:'30%'
   }, 
   button: {
-    borderWidth: 5,
+    borderWidth: 1,
     borderRadius: 22,
-    borderColor: '#3f46c8',
+    borderColor: '#3746c8',
     height: 58,
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     justifyContent: 'center',
     marginTop: 90,
     margin: 20,
-    backgroundColor: '#3f46c8'
+    backgroundColor: '#3746c8'
   },   
   buttonText: {
     textAlign: 'center',

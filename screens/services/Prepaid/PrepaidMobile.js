@@ -3,24 +3,15 @@ import {
   View, ScrollView, SafeAreaView, Text, TextInput, TouchableOpacity, Pressable, StyleSheet, Image,
   FlatList, ActivityIndicator, Alert, Modal
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BottomSheet } from 'react-native-btr';
-
+import { REACT_APP_BASE_Bill_URL } from "@env";
+ 
 const PrepaidMobile = ({ navigation, route }) => {
-  const { macId, ipId } = route.params;
-
-  // console.log('=macid============>', JSON.stringify(macId))
-  // console.log('======ip=======>', JSON.stringify(ipId))
-  // // let macIDis=macId
-  // let ipIDis=ipId 
-
-
-  const toggleBottomNavigationView = () => {
+const { macId, ipId } = route.params;
+const toggleBottomNavigationView = () => {
     //Toggling the visibility state of the bottom sheet
-    setVisible(!visible);
+      setVisible(!visible); 
   };
-  console.log('---------dvfdvfdv=====', planName, planAmount, packageDescription, validity)
-
   let countryCode = '+91'
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -41,13 +32,13 @@ const PrepaidMobile = ({ navigation, route }) => {
   //const [devMac, setDevMac] = useState('0.0.0.0.0')
   // console.log('operator ++----', responseData);
 
-  console.log('mobileNo is-----', circleId, operatorid,planAmount);
+  console.log('mobileNo is-----', circleId, operatorid, planAmount);
 
   // GET API for fetching all Operators
 
   const PrepaidOperators = () => {
 
-    fetch('http://192.168.1.5:7000/bills/getMobilePrepaidOperators')
+    fetch(`${REACT_APP_BASE_Bill_URL}/getMobilePrepaidOperators`)
       .then((response) => response.json())
       .then((data) => {
         console.log('---0----', data);
@@ -61,13 +52,11 @@ const PrepaidMobile = ({ navigation, route }) => {
       })
   };
 
-
-
   // GET API for fetching all Circles
   // http://192.168.1.31:7000/bills/fetchMobilePrepaidPlan
 
   const OperatorsCircle = () => {
-    fetch('http://192.168.1.5:7000/bills/getMobilePrepaidCircles')
+    fetch(`${REACT_APP_BASE_Bill_URL}/getMobilePrepaidCircles`)
       .then((response) => response.json())
       .then((data) => {
         //  console.log('---Circle----', data);
@@ -85,7 +74,7 @@ const PrepaidMobile = ({ navigation, route }) => {
   // Post Api Plan fetching
 
   const fetchPlan = () => {
-    fetch('http://192.168.1.5:7000/bills/fetchMobilePrepaidPlan', {
+    fetch(`${REACT_APP_BASE_Bill_URL}/fetchMobilePrepaidPlan`, {
       method: 'POST',
       body: JSON.stringify({
         circleId: circleId,
@@ -97,11 +86,7 @@ const PrepaidMobile = ({ navigation, route }) => {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log('---Circle-is---')
         const data = res[0]["status"]
-        console.log('+++++++++++++=', data);
-        // const navData=datas.data[0]
-        // console.log("=====navData====",navData);
         if (data === true) {
           setResponseData(res[0].data.result.payload[0].circleWisePlanLists[0].plansInfo)
           setModalVisible(true)
@@ -120,9 +105,6 @@ const PrepaidMobile = ({ navigation, route }) => {
   };
 
   const plans = responseData;
-  // console.log('ipadd', ipId);
-  // console.log('macid', macId);
-  // console.log('biller_name si====', biller_name);
   useEffect(() => {
     PrepaidOperators()
     OperatorsCircle()
@@ -130,18 +112,17 @@ const PrepaidMobile = ({ navigation, route }) => {
 
   // Proceed To Pay Api
   const ProceedToPay = () => {
-    fetch('http://192.168.1.5:7000/bills/mobilePrepaidReachargePayment', {
+    fetch(`${REACT_APP_BASE_Bill_URL}/mobilePrepaidReachargePayment`, {
       method: 'POST',
       body: JSON.stringify({
         "mobile": mobileNo,
         "ip": ipId,
-        "mac": " 0.0.0.0",
+        "mac": "0.0.0.0",
         "amount": planAmount,
         "OperatorCode": "AT",
         "CircleRefID": circleId,
-         "planId":planName,
+        "planId": planName,
         "operatorName": operatorValue,
-
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -151,18 +132,18 @@ const PrepaidMobile = ({ navigation, route }) => {
       .then((data) => {
         if (data.status === false) {
           console.log('clickeedeeeeeeee');
-          console.log('******++++++===>>>',data);
+          console.log('******++++++===>>>', data.data.price);
           navigation.navigate('RechargePlan', {
             mac: "0.0.0.0.0",
             ip: ipId,
             mob: mobileNo,
             operatorValue: operatorValue,
-            planCost: planAmount,
+            planCost: data.data.price,
             planDesc: packageDescription,
             planValidation: validity
           })
         } else {
-          alert(res.message)
+          alert(data.message)
         }
       }).catch((err) => {
         alert(err.message);
@@ -170,11 +151,9 @@ const PrepaidMobile = ({ navigation, route }) => {
       });
   }
 
-
   return (
     <View>
       {/* header */}
-
       <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginLeft: 0.5, marginRight: 0.5 }}>
         <View style={{ flexDirection: 'row', padding: 15, }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -185,12 +164,7 @@ const PrepaidMobile = ({ navigation, route }) => {
           </TouchableOpacity>
           <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '28%' }}>Prepaid  Bills</ Text>
         </View>
-
-       </View>
-
-      {/* mobile No */}
-      {/* <View style={{ padding: 20,}}> */}
-
+      </View>
       <View style={{ marginTop: '5%', padding: 20, }}>
         <Text style={{ fontSize: 20, padding: 8, fontWeight: '400', color: 'black', marginTop: '1%', marginBottom: -13 }}> Enter Mobile No </ Text>
         <View style={{ flexDirection: 'row', marginTop: 10, borderBottomWidth: 1, borderColor: 'black' }}>
@@ -242,7 +216,7 @@ const PrepaidMobile = ({ navigation, route }) => {
         <TouchableOpacity
           onPress={toggleBottomNavigationView}
           style={{ width: '95%', height: 62, marginTop: '-28%', borderRadius: 20, borderWidth: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', backgroundColor: '#132fba' }}>
-          <Text style={{ fontSize: 22, color: 'white', padding: 2, textAlign: 'center', }}>Processed</Text>
+          <Text style={{ fontSize: 20, color: 'white', padding: 2, textAlign: 'center', }}>PROCEED</Text>
           {loading ?
             (<ActivityIndicator size="large" color='white' style={{ marginLeft: 12 }} />) : null}
         </TouchableOpacity>
@@ -290,7 +264,7 @@ const PrepaidMobile = ({ navigation, route }) => {
                         fetchPlan()
                         setVisible(false)
                       }}>
-                        <Text style={{ fontSize: 20, fontWeight: '300', color: 'black', margin: 10,marginTop:-8 }}>{item.circleName}</Text></TouchableOpacity>
+                        <Text style={{ fontSize: 20, fontWeight: '300', color: 'black', margin: 10, marginTop: -8 }}>{item.circleName}</Text></TouchableOpacity>
                     </View>
                   )}
                 />

@@ -12,10 +12,10 @@ const [money,setMoney]=useState('0')
  let x=route.params?.datas
 const collectAllMoney=()=>{
   setUpdatedMoney(route.params?.datas)
-};
+}; 
 
 // const newRef= useRef()
-const updatevalue=()=>{
+const updatevalue=()=>{ 
   useEffect(()=>{
     setMoney('1000')
   })
@@ -30,6 +30,7 @@ setActive(true)
   }
   
 }
+
   return(
     <View style={{padding:20,marginTop:'10%'}}>
       <Text style={{fontSize:30,fontWeight:'bold'}}>Wallet</ Text>

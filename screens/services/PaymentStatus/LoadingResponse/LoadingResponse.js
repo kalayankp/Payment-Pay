@@ -7,6 +7,6 @@ const LoadingResponse = () => {
       <Text>LoadingResponse</Text>
     </View>
   )
-}
+} 
 
 export default LoadingResponse

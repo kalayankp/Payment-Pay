@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { REACT_APP_BASE_URL } from "@env";
 
 const ProfileInfo = ({ navigation }) => {
-
+ 
   const [firstName, setFirstName] = useState('')
   const [dob, setDob] = useState('')
   const [mobile, setMobile] = useState('')
@@ -12,12 +12,12 @@ const ProfileInfo = ({ navigation }) => {
   const [lastLogin, setLastLogin] = useState() //wallet_no
   const [address, setAddress] = useState('')
   const [wallet_no, setWallet_no] = useState('')
-  
+      
   useEffect(() => {
+    
     fetch(`${REACT_APP_BASE_URL}/profileInfo`)
       .then((response) => response.json())
       .then((json) => {
-        
         const fname = json.data.first_name + ' ' + json.data.last_name
         const email = json.data.email
         const dob = json.data.dob
@@ -25,7 +25,6 @@ const ProfileInfo = ({ navigation }) => {
         const panNo = json.data.PAN
         const lastLogin = json.data.last_login
         let address = json.data.address
-
         setFirstName(fname)
         setEmail(email)
         setDob(dob)
@@ -36,7 +35,7 @@ const ProfileInfo = ({ navigation }) => {
         setWallet_no(json.data.wallet_no)
         console.log('&&&&&&&&&&&&&--->',json)
       })
-
+ 
   }, []);
  
   return (
@@ -54,7 +53,7 @@ const ProfileInfo = ({ navigation }) => {
 
        </View>
       <ScrollView>
-        <Text style={{ margin: 10, color: 'black', marginLeft: 22, marginTop: 52 }}>NAME  (AS PER PAN)</Text>
+        <Text style={{ margin: 10, color: 'black', marginLeft: 22, marginTop: '5%' }}>NAME  (AS PER PAN)</Text>
         <Text style={{ textAlign: "center", color: 'black', borderBottomWidth: 1, marginTop: 5, margin: 5, width: '95%', fontSize: 18, borderBottomColor: 'black' }}>{firstName}</Text>
 
         <Text style={{ margin: 10, color: 'black', marginLeft: 22 }}>EMAIL</Text>

@@ -1,22 +1,23 @@
 import { Text, View, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect } from 'react'
 import { REACT_APP_BASE_URL } from "@env";
+   
 export default function EditProfile({ navigation }) {
   console.log(REACT_APP_BASE_URL) 
   const handleClick = () => {
-        
+         
     fetch(`${REACT_APP_BASE_URL}/getBankAccount`)
       .then((response) => response.json())
       .then((json) => {
         if (json.status === false) {  
           navigation.navigate('LinkBankAcc')
-        } else {
+         } else {
 
           navigation.navigate('ExistAccount')
         }
         console.log(json.status)
       })
-  }
+  } 
 
   return (
     <View>
@@ -33,19 +34,99 @@ export default function EditProfile({ navigation }) {
       </View>
       <TouchableOpacity onPress={() => { navigation.navigate('ChangeEmail') }} style={{ borderBottomWidth: 1, marginTop: 20, }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
-          <View>
+          <View style={{flexDirection:'row'}}>
             <Image style={{ width: 30, height: 30, marginTop: 14 }} source={require('../../assests/images/editmemail.png')} />
-          </View>
-          <View>
-            <Text style={{ marginTop: 0, fontWeight: '400', fontSize: 18, marginTop: 10, width: 220, color: 'black' }}>Change Email Address</Text>
+            <Text style={{ fontWeight: '400', fontSize: 18, marginTop: '6%', width: 220, color: 'black',paddingLeft:'9%' }}>Change Email Address</Text>
           </View>
           <View>
             <Image style={{ width: 30, height: 30, justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 10 }} source={require('../../assests/icons/arrow.png')} />
           </View>
         </View>
       </TouchableOpacity>
-
+  
       <TouchableOpacity onPress={() => { navigation.navigate('ChangePassword') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
+          <View style={{flexDirection:'row'}}>
+          <Image style={{ width: 30, height: 30, marginTop: 10, paddingTop: 10, }} source={require('../../assests/images/password.png')} />
+         
+            <Text style={{ fontWeight: '400', fontSize: 18, marginTop: '6%', width: 220, color: 'black',paddingLeft:'9%' }}>Change Password</Text>
+          </View>
+          <View>
+          <Image style={{ width: 30, height: 30, justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 10 }} source={require('../../assests/icons/arrow.png')} />
+         </View>
+        </View>
+      </TouchableOpacity>
+   
+      <TouchableOpacity onPress={() => { navigation.navigate('AddressUpdate') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
+          <View style={{flexDirection:'row'}}>
+          <Image style={{ width: 19.5, height: 28, marginTop: 10, paddingTop: 6, }} source={require('../../assests/images/location.png')} />
+           <Text style={{ fontWeight: '400', fontSize: 18, marginTop: '5%', width: 220, color: 'black',paddingLeft:'12.5%' }}>Update Address</Text>
+          </View>
+          <View>
+          <Image style={{ width: 30, height: 30, justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 10 }} source={require('../../assests/icons/arrow.png')} />
+         </View>
+        </View>
+      </TouchableOpacity>
+      
+      <TouchableOpacity onPress={() => { navigation.navigate('TpinScreen') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
+          <View style={{flexDirection:'row'}}>
+          <Image style={{ width: 30, height: 29,marginTop: 5 }} source={require('../../assests/images/Untitled.png')} />
+          <Text style={{ fontWeight: '400', fontSize: 18, marginTop: '3%', width: 220, color: 'black',paddingLeft:'8%' }}>  SET T-PIN</Text>
+          </View>
+          <View>
+          <Image style={{ width: 30, height: 30, marginTop: 10,marginRight:5 }} source={require('../../assests/icons/arrow.png')} />
+         </View>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => { navigation.navigate('UsageCap') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
+          <View style={{flexDirection:'row'}}>
+          <Image style={{ width: 40, height: 40, }} source={require('../../assests/images/wallet.png')} />
+          <Text style={{ fontWeight: '400', fontSize: 18, marginTop: '3%', width: 220, color: 'black',paddingLeft:'7%' }}> Set Usage Cap</Text>
+          </View>
+          <View>
+          <Image style={{ width: 30, height: 30, marginRight:6, marginTop: 10 }} source={require('../../assests/icons/arrow.png')} />
+         </View>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => handleClick()}  style={{ borderBottomWidth: 1, marginTop: 10, }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
+          <View style={{flexDirection:'row'}}>
+          <Image style={{ width: 30, height: 30, marginTop: 3}} source={require('../../assests/images/bank.png')} />
+          <Text style={{ fontWeight: '400', fontSize: 18, marginTop: '3%', width: 220, color: 'black',paddingLeft:'11%' }}>Update Bank Account</Text>
+          </View>
+          <View>
+          <Image style={{ width: 30, height: 30, marginRight:6, marginTop: 10 }} source={require('../../assests/icons/arrow.png')} />
+         </View>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => { navigation.navigate('IncomeVerification') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
+          <View style={{flexDirection:'row'}}>
+          <Image style={{ width: 40, height: 40,marginTop: 3 }} source={require('../../assests/images/income.png')} />
+          <Text style={{ fontWeight: '400', fontSize: 18, marginTop: '3%', width: 220, color: 'black',paddingLeft:'7%' }}> Income Verification</Text>
+          </View>
+          <View>
+          <Image style={{ width: 30, height: 30, marginRight:6, marginTop: 10 }} source={require('../../assests/icons/arrow.png')} />
+         </View>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => { navigation.navigate('WalletClosure') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
+          <View style={{flexDirection:'row'}}>
+          <Image style={{ width: 50, height: 50 }} source={require('../../assests/images/editicon.png')} />
+          <Text style={{ fontWeight: '400', fontSize: 18, marginTop: '4%', width: 220, color: 'black',paddingLeft:'4%' }}> Wallet Closure</Text>
+          </View>
+          <View>
+          <Image style={{ width: 30, height: 30, marginRight:8, marginTop: 10 }} source={require('../../assests/icons/arrow.png')} />
+         </View>
+        </View>
+      </TouchableOpacity>
+
+      {/* <TouchableOpacity onPress={() => { navigation.navigate('ChangePassword') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
           <View>
             <Image style={{ width: 30, height: 30, marginTop: 10, paddingTop: 10, }} source={require('../../assests/images/password.png')} />
@@ -57,9 +138,9 @@ export default function EditProfile({ navigation }) {
             <Image style={{ width: 30, height: 30, justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 10, }} source={require('../../assests/icons/arrow.png')} />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
-      <TouchableOpacity onPress={() => { navigation.navigate('AddressUpdate') }} style={{ borderBottomWidth: 1, marginTop: 12, }}>
+      {/* <TouchableOpacity onPress={() => { navigation.navigate('AddressUpdate') }} style={{ borderBottomWidth: 1, marginTop: 12, }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
           <View>
             <Image style={{ width: 20, height: 30, marginTop: 10, paddingTop: 6, }} source={require('../../assests/images/location.png')} />
@@ -71,9 +152,9 @@ export default function EditProfile({ navigation }) {
             <Image style={{ width: 30, height: 30, justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 10, }} source={require('../../assests/icons/arrow.png')} />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
-      <TouchableOpacity onPress={() => { navigation.navigate('TpinScreen') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+      {/* <TouchableOpacity onPress={() => { navigation.navigate('TpinScreen') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
           <View>
             <Image style={{ width: 30, height: 30, }} source={require('../../assests/images/Untitled.png')} />
@@ -85,9 +166,9 @@ export default function EditProfile({ navigation }) {
             <Image style={{ width: 30, height: 30, }} source={require('../../assests/icons/arrow.png')} />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
-      <TouchableOpacity onPress={() => { navigation.navigate('UsageCap') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+      {/* <TouchableOpacity onPress={() => { navigation.navigate('UsageCap') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
           <View>
             <Image style={{ width: 40, height: 40, }} source={require('../../assests/images/wallet.png')} />
@@ -99,9 +180,9 @@ export default function EditProfile({ navigation }) {
             <Image style={{ width: 30, height: 30, justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 10, }} source={require('../../assests/icons/arrow.png')} />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
-      <TouchableOpacity onPress={() => handleClick()} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+      {/* <TouchableOpacity onPress={() => handleClick()} style={{ borderBottomWidth: 1, marginTop: 10, }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
           <View>
             <Image style={{ width: 30, height: 30, }} source={require('../../assests/images/bank.png')} />
@@ -113,9 +194,9 @@ export default function EditProfile({ navigation }) {
             <Image style={{ width: 30, height: 30, justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 1, }} source={require('../../assests/icons/arrow.png')} />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
-      <TouchableOpacity onPress={() => { navigation.navigate('IncomeVerification') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+      {/* <TouchableOpacity onPress={() => { navigation.navigate('IncomeVerification') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
           <View>
             <Image style={{ width: 40, height: 40 }} source={require('../../assests/images/income.png')} />
@@ -127,9 +208,9 @@ export default function EditProfile({ navigation }) {
             <Image style={{ width: 30, height: 30, justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 10 }} source={require('../../assests/icons/arrow.png')} />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
-      <TouchableOpacity onPress={() => { navigation.navigate('WalletClosure') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
+      {/* <TouchableOpacity onPress={() => { navigation.navigate('WalletClosure') }} style={{ borderBottomWidth: 1, marginTop: 10, }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 5 }}>
           <View>
             <Image style={{ width: 50, height: 50, }} source={require('../../assests/images/editicon.png')} />
@@ -137,11 +218,11 @@ export default function EditProfile({ navigation }) {
           <View>
             <Text style={{ marginTop: 0, fontWeight: '400', fontSize: 18, marginTop: 10, width: 220, color: 'black' }}>Wallet Closure  </Text>
           </View>
-          <View>
+          <View> 
             <Image style={{ width: 30, height: 30, justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 10, }} source={require('../../assests/icons/arrow.png')} />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
-  )
-}
+  ) 
+} 

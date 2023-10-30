@@ -1,11 +1,10 @@
 import { View, Text,TextInput,TouchableOpacity,StyleSheet } from 'react-native'
 import React from 'react'
-
+ 
 const TpinScreen = ({navigation}) => {
   return (
     <View>
     <Text style={{marginTop:50,textAlign:'center',fontWeight:'bold',fontSize:28}}>TPIN</Text>
-
     <View style={{justifyContent:'center',alignItems:"center",marginTop:250 }}>
         <TouchableOpacity onPress={()=>navigation.navigate('EnableTPIN')}
             style={styles.button}>

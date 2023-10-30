@@ -13,7 +13,7 @@ const UpdateBankAccount = ({ navigation }) => {
     const [accountName, setAccountName] = useState('')
     const [bankName, setBankName] = useState('')
     const [ifscCode, setIfscCode] = useState('')
-    
+     
     //  ----------- POST API CALL -------------------
     const UpdateBankAccountHandle = () => {
         fetch(`${ REACT_APP_BASE_URL }/addBankAccount`, {
@@ -47,7 +47,7 @@ const UpdateBankAccount = ({ navigation }) => {
 
     return (
 
-        <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+        <SafeAreaView style={{ flex: 1, }}>
             <ScrollView>
                 {/* <TouchableOpacity style={{ justifyContent: 'flex-end' }} onPress={() => navigation.goBack()}>
                     <Image
@@ -55,8 +55,17 @@ const UpdateBankAccount = ({ navigation }) => {
                         source={require('../../assests/icons/cancel.png')}
                     />
                 </TouchableOpacity> */}
-                <Text style={{ fontSize: 24, color: '#36454F', marginTop: "5%", marginLeft: 20, textAlign: 'center' }}>Update Account Details  </Text>
-                <View style={{ justifyContent: 'center', margin: 20, marginTop: '10%', }}>
+                <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginLeft: 0.5, marginRight: 0.5 }}>
+                <View style={{ flexDirection: 'row', padding: 15, }}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Image
+                            style={{ width: 25, height: 30, }}
+                            source={require('../../assests/images/leftArrow.png')}
+                        />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '30%' }}>RingPe</Text>
+                </View>
+            </View><View style={{ justifyContent: 'center', margin: 20, marginTop: '10%', }}>
                     <Text style={{ fontSize: 20, color: '#36454F' }}> Bank Name</Text>
                     <TextInput placeholder='Enter Bank Name' onChangeText={(e) => { setBankName(e) }} style={{ borderBottomWidth: 1, paddingLeft: 20, fontSize: 18, borderBottomColor: '#36454F', color: '#353935' }} />
                 </View>
@@ -68,16 +77,15 @@ const UpdateBankAccount = ({ navigation }) => {
 
                 <View style={{ justifyContent: 'center', margin: 20, }}>
                     <Text style={{ fontSize: 20, color: '#36454F' }}>Bank Account Number</Text>
-                    <TextInput placeholder='Bank Account' onChangeText={(e) => { setAccountNo(e) }} style={{ borderBottomWidth: 1, paddingLeft: 20, fontSize: 18, borderBottomColor: '#36454F', color: '#353935' }} />
+                    <TextInput placeholder='Bank Account' keyboardType="numeric"  onChangeText={(e) => { setAccountNo(e) }} style={{ borderBottomWidth: 1, paddingLeft: 20, fontSize: 18, borderBottomColor: '#36454F', color: '#353935' }} />
                 </View>
-
                 <View style={{ justifyContent: 'center', margin: 20, }}>
                     <Text style={{ fontSize: 20, color: '#36454F' }}>IFSC CODE  </Text>
                     <TextInput placeholder='IFSC CODE' onChangeText={(e) => { setIfscCode(e) }} style={{ borderBottomWidth: 1, paddingLeft: 20, fontSize: 18, borderBottomColor: '#36454F', color: '#353935' }} />
                 </View>
 
                 <View style={{ borderBottomWidth: 1, width: '90%', borderColor: '#36454F', margin: 20, padding: 1, marginTop: 10 }}>
-
+ 
                     <Dropdown
                         style={styles.dropdown}
                         placeholderStyle={styles.placeholderStyle}

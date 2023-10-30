@@ -18,16 +18,16 @@ const PaymentFailure = ({navigation,route}) => {
                     </TouchableOpacity>
                     <Text style={{ fontSize: 25, fontWeight: '400', color: 'white', marginLeft: '30%',elevation:0.5 }}> RINGPE</ Text>
                 </View>
-            </View> 
+            </View>  
             <LinearGradient
                 colors={['#FF5733', '#C70039',]}
                 start={{ x: 1, y: 0 }} end={{ x: 0, y: 1 }}
                 style={{borderWidth: 1, borderRadius: 22,borderBottomColor:'#FF5733',borderBottomWidth:5,  padding: 20,marginTop:'10%',margin:10,borderWidth:1,borderColor:'white'}}>
-            <View style={{ }}>
+            <View style={{ }}> 
                 <View style={{ flexDirection: "row" }}>
                     <View>
-                        <Image source={require('../../../../assests/icons/ringpeIcon.png')} style={{ width: 112, height: 122, marginTop: -20, marginLeft: -20 }} />
-                    </View>
+                    <Image source={require('../../../../assests/icons/ringpeWhiteIcons.png')} style={{ width: 80, height: 65, marginTop:5, marginLeft: -10 }} />
+                        </View>
 
                     <Text style={{ fontSize: 28, fontWeight: '600', marginLeft: 18, color: 'white', marginTop: '10%' }}> MR. Raviji  </Text>
                 </View>

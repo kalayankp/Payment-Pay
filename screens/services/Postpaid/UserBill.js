@@ -1,18 +1,14 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, ActivityIndicator, SafeAreaView, Image } from 'react-native'
 import React, { useState } from 'react'
- 
+import { REACT_APP_BASE_Bill_URL } from "@env";
 const UserBill = ({ navigation, route }) => {
-  const { ipID, macid, mobileNo, billerId, biller_name, billDate, dueDate, refId, billerTotalAmount, billerAccountNo } = route.params;
+  const { ipID, macid, mobileNo, billerId, biller_name, billDate, dueDate, refId, billerTotalAmount, billerAccountNo,name } = route.params;
   const [loading, setLoading] = useState(false);
-
-  console.log('=imei============>', JSON.stringify(refId))
-  console.log('=======ip is======>', JSON.stringify(biller_name))
-
+   console.log('Data is',JSON.stringify(refId));
   // ----------------- POST API CALL UserData Send ----------------------------
-
   const postUserData = () => {
     setLoading(true)
-    fetch("http://192.168.1.30:7000/bills/mobilePostpaidBillPay", {
+    fetch(`${REACT_APP_BASE_Bill_URL}/mobilePostpaidBillPay`, {
       method: 'POST',
       body: JSON.stringify({
         mobile: mobileNo,
@@ -21,7 +17,6 @@ const UserBill = ({ navigation, route }) => {
         billerId: billerId,
         refId: refId,
         amount: billerTotalAmount
-
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -30,11 +25,11 @@ const UserBill = ({ navigation, route }) => {
       .then((response) => response.json())
       .then((data) => {
         setLoading(false)
-      
+
         const incomingData = data.data.result.payload
-        console.log('updated---',data);
-        if(data.data.status === 200) {
-            navigation.navigate("PaymentSucess", {
+        console.log('updated---', data);
+        if (data.data.status === 200) {
+          navigation.navigate("PaymentSucess", {
             'mobileNo': mobileNo,
             'cust_name': data.data.name,
             'billerTotalAmount': incomingData.paidAmount,
@@ -46,9 +41,9 @@ const UserBill = ({ navigation, route }) => {
             'time': data.data.Timestamp,
           })
         }
-         else if(data.data.status === 400) {
+        else if (data.data.status === 400) {
           navigation.navigate("PaymentFailure", {
-            'mobileNo': mobileNo, 
+            'mobileNo': mobileNo,
             'cust_name': data.data.name,
             'billerTotalAmount': incomingData.paidAmount,
             'billerAccountNo': incomingData.billNumber,
@@ -57,19 +52,19 @@ const UserBill = ({ navigation, route }) => {
             'payTime': incomingData.requestTimeStamp,
             'bbpsNo': incomingData.additionalParams.billerReferenceNumber,
             'time': data.data.Timestamp,
-           
+
           })
         }
         else {
-         alert(data.data.result.message)
+          alert(data.data.result.message)
         }
       })
       .catch((err) => {
         alert(err.message)
-        console.log('---jnj===',err.data.result.message);
+        console.log('---jnj===', err.data.result.message);
       })
-  };
-
+  }; 
+ 
   return (
     <SafeAreaView style={{ backgroundColor: "#F9F6EE", flex: 1 }}>
       <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 15, borderBottomRightRadius: 15, marginLeft: 0.5, marginRight: 0.5 }}>
@@ -80,14 +75,14 @@ const UserBill = ({ navigation, route }) => {
               source={require('../../../assests/images/leftArrow.png')}
             />
           </TouchableOpacity>
-          <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '20%' }}>POSTPAID  BILLS</ Text>
+          <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '20%' }}>{name}  BILLS</ Text>
         </View>
 
       </View>
       <View >
         {/* <Text style={{ fontSize: 16, color: 'black', fontWeight: '500' }}>Total Amount</Text> */}
         <View style={styles.modalView}>
-          <Text style={{ fontSize: 22, color: 'black', marginTop: '5%' }}>Bill Detail</Text>
+          <Text style={{ fontSize: 22, color: 'black', marginTop: '5%' }}>Bill Details</Text>
           {/* biller_name, billerAccountNo, billerTotalAmount, billDate, dueDate, refId */}
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: '8%' }}>
             <Text style={{ fontSize: 16, color: 'black', fontWeight: '500' }}>Total Amount</Text>
@@ -123,7 +118,6 @@ const UserBill = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
       </View>
-
     </SafeAreaView>
   )
 }
@@ -134,9 +128,9 @@ const styles = StyleSheet.create({
 
   modalView: {
     width: '96%',
-    height: '55%',
+    height: '65%',
     margin: 8,
-    marginTop: '50%',
+    marginTop: '30%',
     backgroundColor: 'white',
     borderRadius: 20,
     borderColor: 'white',
@@ -164,7 +158,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
   },
-
   textStyle: {
     color: 'white',
     fontWeight: '400',

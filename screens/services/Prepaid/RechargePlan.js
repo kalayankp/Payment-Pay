@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
-  View, ScrollView, SafeAreaView, Text, TextInput, TouchableOpacity, Pressable, StyleSheet, Image,
-  
+  View, SafeAreaView, Text, TextInput, TouchableOpacity, Pressable, StyleSheet, Image,
 } from 'react-native';
 
 const RechargePlan = ({ navigation, route }) => {
@@ -27,7 +26,6 @@ const RechargePlan = ({ navigation, route }) => {
           <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '20%' }}>Recharge  Plans</ Text>
         </View>
       </View>
-
       <View style={{ borderWidth: 2, backgroundColor: '#E8E8E8', elevation: -0.2, padding: 20, margin: 10, borderRadius: 20, borderColor: 'white', marginTop: '10%' }}>
         <View style={{ justifyContent: "center", flexDirection: "row" }}>
           <Text style={{ textAlign: 'left', fontSize: 20, color: "#132fba", fontWeight: "500" }}>Mobile No :</Text>
@@ -35,7 +33,7 @@ const RechargePlan = ({ navigation, route }) => {
         </View>
         <Text style={{ textAlign: 'center', fontSize: 18, color: 'grey' }}>Operator: {operatorValue}</Text>
       </View>
-
+ 
       <View style={{ borderWidth: 2, backgroundColor: '#E8E8E8', elevation: -0.2, padding: 20, margin: 10, borderRadius: 20, borderColor: 'white', marginTop: '2%' }}>
         <Text style={{ textAlign: 'left', fontSize: 24, color: "#132fba", fontWeight: "500",borderBottomWidth:1,padding:10 }}>Plan</Text>
         <Text style={{ textAlign: 'center', fontSize: 30, color: 'black',marginTop:20 }}>{'\u20B9'}{planCost}</Text>

@@ -4,7 +4,6 @@ import React from 'react'
 const Settings = () => {
 
   return (
- 
     <View>
       <Text>Settings</Text>
       <TouchableOpacity onPress={() => { navigation.navigate('EditProfile') }} style={{ borderBottomWidth: 1, marginTop: 15 }}>

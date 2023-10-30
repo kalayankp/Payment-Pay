@@ -13,8 +13,7 @@ const data1 = [
   { label: 'Politicians', value: '7' },
   { label: 'Others', value: '7' },
 ];
- 
- 
+  
 const ChangeEmail = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [updateemail, setUpdateEmail] = useState('')
@@ -25,9 +24,8 @@ const ChangeEmail = ({ navigation }) => {
       .then((response) => response.json())
 
       .then((json) => {
-
         setEmail(json.data.email)
-        console.log('---', json.data.email)
+        console.log('email is ', json.data.email)
       })
   }, []);
 
@@ -42,13 +40,15 @@ const ChangeEmail = ({ navigation }) => {
       }),
       headers: {
         'Content-Type': 'application/json',
-      },
+      },  
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.status === true) {
           console.log('-------', data)
           navigation.goBack()
+        }else{
+          alert(data.message)
         }
       })
       .catch((err) => {
@@ -58,9 +58,8 @@ const ChangeEmail = ({ navigation }) => {
   }
 
   return (
-
     <View>
-       <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginLeft: 0.5, marginRight: 0.5 }}>
+      <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginLeft: 0.5, marginRight: 0.5 }}>
         <View style={{ flexDirection: 'row', padding: 15, }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
@@ -71,22 +70,21 @@ const ChangeEmail = ({ navigation }) => {
           <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '29%' }}>Change Email</ Text>
         </View>
       </View>
-      <View style={{ flexDirection: 'row', marginTop: '15%', borderWidth: 2, borderColor: 'grey', borderRadius: 20, margin: 22, justifyContent: 'center' }}>
-        <Text style={{ fontSize: 22, borderWidth: 0, width: 410, marginLeft: 65, padding: 10, color: 'black' }}>{email}</Text>
+      <View style={{ flexDirection: 'row', marginTop: '15%', borderWidth: 2, borderColor: 'black', borderRadius: 20, margin: 22, justifyContent: 'center' }}>
+        <Text style={{ fontSize: 22, borderWidth: 0, width: 410, padding: 10, color: 'black',textAlign:'center' }}>{email}</Text>
       </View>
-      <View style={{ flexDirection: 'row', marginTop: 10, borderWidth: 2, borderColor: 'grey', borderRadius: 20, margin: 22, justifyContent: 'center' }}>
-
-        <TextInput placeholder='Add New Email' onChangeText={(e) => { setUpdateEmail(e) }} keyboardType="numeric" maxLength={36} style={{ fontSize: 22, borderWidth: 0, width: 350, marginLeft: 18, paddingLeft: 8, color: 'black' }} />
+      <View style={{ flexDirection: 'row', marginTop: 10, borderWidth: 2, borderColor: 'black', borderRadius: 20, margin: 22, justifyContent: 'center' }}>
+        <TextInput placeholder='Add New Email' onChangeText={(e) => { setUpdateEmail(e) }}  maxLength={36} style={{ fontSize: 22, borderWidth: 0, width: 350, textAlign:'center',color: 'black' }} />
       </View>
-
-      <View style={{ borderWidth: 2, borderRadius: 22, width: '89%', margin: 20, padding: 5, borderColor: 'grey', marginTop: 15 }}>
+  
+      <View style={{ borderWidth: 2, borderRadius: 22, width: '89%', margin: 20, padding: 5, borderColor: 'black', marginTop: 15 }}>
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           inputSearchStyle={styles.inputSearchStyle}
           iconStyle={styles.iconStyle}
-          data={data1}
+          data={data1} 
           search
           maxHeight={1000}
           labelField="label"

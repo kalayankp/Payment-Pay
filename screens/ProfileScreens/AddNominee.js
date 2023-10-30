@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Tex
 import React, { useState } from 'react'
 import { REACT_APP_BASE_URL } from "@env";
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-
 import moment from 'moment';
 import DropDown from 'react-native-drop-down-mith';
 const data = [
@@ -11,7 +10,7 @@ const data = [
     { value: 'Son', id: '3' },
     { value: 'Husband', id: '2' },
     { value: 'Wife', id: '3' },
-];
+];  
      
 const AddNominee = ({ navigation }) => {
     const [accountNo, setAccountNo] = useState('');
@@ -33,8 +32,7 @@ const AddNominee = ({ navigation }) => {
         setSelectedDate(datas);
         hideDatePicker();
     };
-
-
+ 
     // ----------- POST API CALL -------------------
 
     const dataPost = () => {
@@ -63,7 +61,18 @@ const AddNominee = ({ navigation }) => {
             });
     }
     return (
-        <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+        <SafeAreaView style={{ flex: 1, }}>
+             <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginLeft: 0.5, marginRight: 0.5 }}>
+                <View style={{ flexDirection: 'row', padding: 15, }}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Image
+                            style={{ width: 25, height: 30, }}
+                            source={require('../../assests/images/leftArrow.png')}
+                        />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '30%' }}>RingPe</Text>
+                </View>
+            </View>
             <ScrollView style={{ margin: 20 }}>
                 <TouchableOpacity style={{ justifyContent: 'flex-end' }} onPress={() => navigation.goBack()}>
                     <Image
@@ -74,12 +83,12 @@ const AddNominee = ({ navigation }) => {
 
                 <Text style={{ fontSize: 24, color: '#36454F', marginTop: "5%", marginLeft: 20, textAlign: 'center' }}>ADD Nominee Details  </Text>
                 <View style={{ justifyContent: 'center', margin: 20, marginTop: '10%', }}>
-                    <Text style={{ fontSize: 20, color: '#36454F' }}>  Nominee Name</Text>
+                    <Text style={{ fontSize: 20, color: 'black' }}>  Nominee Name</Text>
                     <TextInput placeholder='Enter Nominee Name' onChangeText={(e) => { setAccountNo(e) }} style={{ borderBottomWidth: 1, paddingLeft: 20, fontSize: 18, borderBottomColor: '#36454F', color: '#353935' }} />
                 </View>
 
                 <View style={{ margin: 12, }}>
-                    <Text style={{ fontSize: 20, color: '#36454F',marginLeft:12 }}> RelationShip</ Text>
+                    <Text style={{ fontSize: 20, color: 'black',marginLeft:12 }}> RelationShip</ Text>
                     <View style={{ borderWidth: 1, borderColor: 'black', padding: 2, marginTop: 12 }}>
                         <DropDown
                             itemTextStyle={{ fontSize: 18, color: 'black' }}
@@ -100,10 +109,10 @@ const AddNominee = ({ navigation }) => {
                             onConfirm={handleConfirm}
                             onCancel={hideDatePicker}
                         />
-                         <Text style={{ fontSize: 20, color: '#36454F',marginLeft:24 }}> DOB</ Text>
+                         <Text style={{ fontSize: 20, color: 'black',marginLeft:24 }}> DOB</ Text>
                         <View style={{ flexDirection: 'row', margin: -2, marginLeft:12, marginTop: 16 }}>
                             
-                            <View style={{ borderWidth: 1, width: '95%', justifyContent: 'space-evenly', margin: 4, marginTop: 12,height:46}}>
+                            <View style={{ borderWidth: 1, width: '95%', justifyContent: 'space-evenly', margin: 4, marginTop: 1,height:46}}>
                                 <TouchableOpacity onPress={showDatePicker}>
                                     <Text style={{ textAlign: 'center', justifyContent: 'center', marginTop: 4, padding: 2, fontSize: 18, color: 'black' }}>{`${selectedDate ? selectedDate : "DD/MM/YYYY"}`}</Text>
                                 </TouchableOpacity>
@@ -113,11 +122,11 @@ const AddNominee = ({ navigation }) => {
                 </View>
                 <View style={{ alignItems: "center", marginTop: '27%', }}>
                     <TouchableOpacity style={{ borderColor: '#3f46c8', backgroundColor: '#3f46c8', borderWidth: 1, borderRadius: 20, }} onPress={dataPost}>
-                        <Text style={{ textAlign: 'center', fontSize: 18, padding: 16, borderRadius: 20, color: 'white', width: '70%' }}> Update Nominee Detail</Text>
+                        <Text style={{ textAlign: 'center', fontSize: 18, padding: 22, borderRadius: 20, color: 'white', width: '90%' }}> Update Nominee Detail </Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView> 
 
     )
 }

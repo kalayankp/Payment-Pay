@@ -2,6 +2,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import React from 'react'
 
 const EnableTPIN = ({ navigation }) => {
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text style={{ marginTop: -150, textAlign: 'center', fontWeight: 'bold', fontSize: 28 }}>ENABLE TPIN</Text>
@@ -21,11 +22,10 @@ const EnableTPIN = ({ navigation }) => {
       <View style={{ marginTop: 10, borderWidth: 2, borderColor: 'grey', borderRadius: 20, margin: 22, justifyContent: 'center' }}>
         <TextInput placeholder='CHOOSE SECURITY QUESTION' onChangeText={(e) => { setData(e) }} keyboardType="numeric" maxLength={16} style={{ fontSize: 20, borderWidth: 0, width: 310, textAlign: 'center' }} />
       </View>
+
       <View style={{ marginTop: 10, borderWidth: 2, borderColor: 'grey', borderRadius: 20, margin: 22, justifyContent: 'center' }}>
         <TextInput placeholder='ANSWER' onChangeText={(e) => { setData(e) }} keyboardType="numeric" maxLength={16} style={{ fontSize: 20, borderWidth: 0, width: 310, textAlign: 'center' }} />
       </View>
-
-
 
       <View style={{ justifyContent: 'center', alignItems: "center" }}>
         <TouchableOpacity onPress={() => navigation.navigate('ForgetTpin')}
@@ -33,6 +33,7 @@ const EnableTPIN = ({ navigation }) => {
           <Text style={styles.buttonText}>Done</Text>
         </TouchableOpacity>
       </View>
+
     </View>
   )
 }

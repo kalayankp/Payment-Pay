@@ -2,14 +2,14 @@ import { View, SafeAreaView, Text, TextInput, TouchableOpacity, Image } from 're
 import React, { useState, useEffect } from 'react'
 import { REACT_APP_BASE_URL } from "@env";
 import { useIsFocused } from '@react-navigation/native';
-    
+
 const ExistingBackAccount = ({ navigation }) => {
   const [account_name, setAccountName] = useState('')
   const [account_number, setAccountNumber] = useState('')
   const [bank_name, setBankName] = useState('')
   const [ifsc_code, setIfscCode] = useState('')  
   const isFocused = useIsFocused();
-    
+
   useEffect(() => { 
     fetch(`${REACT_APP_BASE_URL}/getBankAccount`) 
       .then((response) => response.json())
@@ -23,14 +23,25 @@ const ExistingBackAccount = ({ navigation }) => {
   }, [isFocused])
 
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={{ flex: 1,}}>
       {/* <TouchableOpacity style={{ justifyContent: 'flex-end' }} onPress={() => navigation.goBack()}>
         <Image
           style={{ width: 28, height: 26, marginTop: 10, marginLeft: '90%' }}
           source={require('../../assests/icons/cancel.png')}
         />
       </TouchableOpacity> */}
-      <Text style={{ fontSize: 24, color: '#36454F', marginTop: "10%", marginLeft: 20, textAlign: 'center' }}>Existing Account Details  </Text>
+      <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginLeft: 0.5, marginRight: 0.5 }}>
+                <View style={{ flexDirection: 'row', padding: 15, }}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Image
+                            style={{ width: 25, height: 30, }}
+                            source={require('../../assests/images/leftArrow.png')}
+                        />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '30%' }}>RingPe</Text>
+                </View>
+            </View>
+      <Text style={{ fontSize: 24, color: 'black', marginTop: "10%", marginLeft: 20, textAlign: 'center' }}>Existing Account Details  </Text>
       <View style={{ justifyContent: 'center', margin: 20, marginTop: '10%', }}>
         <Text style={{ fontSize: 20, color: '#36454F' }}> Bank Name</Text>
         <Text style={{ borderBottomWidth: 1, paddingLeft: 20, fontSize: 18, borderBottomColor: '#36454F', marginTop: 11, color: '#353935' }}> {bank_name}</Text>

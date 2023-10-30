@@ -5,7 +5,7 @@ const ForgetTpin = () => {
   return (
     <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
          <Text style={{marginTop:10,textAlign:'center',fontWeight:'bold',fontSize:28}}>FORGET TPIN</Text>
-
+    
         <View style={{marginTop:42,borderWidth:2,borderColor:'grey',borderRadius:20,margin:22,justifyContent:'center'}}>
          <TextInput placeholder='ENTER NEW TPIN' onChangeText={(e)=>{setData(e)}} keyboardType="numeric" maxLength={16} style={{fontSize:20,borderWidth: 0,width:310,textAlign:'center'}}/>
         </View>

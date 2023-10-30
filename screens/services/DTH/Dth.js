@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, FlatList, ActivityIndicator, Modal, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { REACT_APP_BASE_Bill_URL } from "@env";
 
 // const data = [
 //   { values: 'Airtel', biller_id: '1' },
@@ -37,18 +38,16 @@ const Dth = ({ navigation, route }) => {
   const [errors, setErrors] = useState()
 
   console.log('mobileNo is-----', mobileNo.length);
-
+ 
   // GET API for fetching all Operators
 
   const Data = () => {
-
-    fetch('http://192.168.1.22:7000/bills/getMobilePostpaidOperators')
+    fetch(`${REACT_APP_BASE_Bill_URL}/getMobilePostpaidOperators`)
       .then((response) => response.json())
       .then((data) => {
-
         const newData = data
         setPostpaidValue(newData.data)
-        setLoading(false);
+        setLoading(false); 
       })
       .catch((err) => {
         alert(err.message)
@@ -64,7 +63,7 @@ const Dth = ({ navigation, route }) => {
 
   const postUserData = () => {
     setLoading(true)
-    fetch("http://192.168.1.22:7000/bills/fetchBills", {
+    fetch("http://192.168.1.254:7000/bills/fetchBills", {
       method: 'POST',
       body: JSON.stringify({
         mobile: mobileNo,
@@ -101,7 +100,8 @@ const Dth = ({ navigation, route }) => {
             'refId': incomingData.refId,
           })
         } else {
-          alert(errors)
+         
+          alert(data.message)
         }
       })
       .catch((err) => {
@@ -174,7 +174,7 @@ const Dth = ({ navigation, route }) => {
           }
           style={{ width: '80%', height: 62, marginTop: '-28%', borderRadius: 20, borderWidth: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', backgroundColor: '#132fba' }}>
 
-          <Text style={{ fontSize: 22, color: 'white', padding: 2, textAlign: 'center', }}>Processed</Text>
+          <Text style={{ fontSize: 20, color: 'white', padding: 2, textAlign: 'center', }}>PROCEED</Text>
 
           {loading ?
             (<ActivityIndicator size="large" color='white' style={{ marginLeft: 12 }} />) : null}
@@ -187,7 +187,6 @@ const Dth = ({ navigation, route }) => {
   )
 }
 export default Dth
-
 
 const styles = StyleSheet.create({
   dropdown: {

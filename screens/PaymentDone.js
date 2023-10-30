@@ -1,11 +1,10 @@
 import { View, Text,TouchableOpacity,Image,SafeAreaView } from 'react-native'
 import React from 'react'
-
-
 import LinearGradient from 'react-native-linear-gradient';
+
 const PaymentDone = ({navigation,route}) => { 
-  
-  const { name,amount,transferId,message,time } = route.params;
+const { name,amount,transferId,message,time } = route.params;
+ 
   return (
     <SafeAreaView>
       <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginLeft: 0.5, marginRight: 0.5 }}>

@@ -3,16 +3,16 @@ import { Text, View, StyleSheet, TextInput, TouchableOpacity, Image } from 'reac
 import React, { useState } from 'react'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
-
+ 
 const FlightBook = () => {
-
+   
   const [hotel, setHotel] = useState('')
   const [selectedDate, setSelectedDate] = useState();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [checkout, setCheckout] = useState();
   const [isCheckoutin, setCheckoutin] = useState(false);
   const Proced = () => { };
-
+  
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };

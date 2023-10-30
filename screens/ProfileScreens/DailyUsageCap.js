@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Slider from '@react-native-community/slider';
 
 const DailyUsageCap = ({ navigation }) => {
+
   const [sliderValue, setSliderValue] = useState(15);
   return (
     <SafeAreaView style={{ flex: 1, margin: 22 }}>
@@ -51,6 +52,6 @@ const styles = StyleSheet.create({
 
     backgroundColor: '#ecf0f1',
   },
-});
+}); 
 
 export default DailyUsageCap

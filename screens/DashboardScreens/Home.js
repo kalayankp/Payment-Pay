@@ -2,7 +2,7 @@
 import React, { useEffect,useState } from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView, ScrollView } from 'react-native';
 import DashboardPage from './DashboardPage';
-
+ 
  const Home=()=> {
   // const logout = async () => {
   //   await AsyncStorage.removeItem('token')
@@ -11,7 +11,7 @@ import DashboardPage from './DashboardPage';
   // const [devMac,setDevMac] = useState('') 
   const macAdd= DeviceInfo.getMacAddressSync();
   const ipAd=DeviceInfo.getIpAddressSync()
- 
+  
   return (
     <SafeAreaView>
     <View style={styles.container}>

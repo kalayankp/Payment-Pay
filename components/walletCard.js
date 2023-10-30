@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { REACT_APP_BASE_URL } from "@env";
 import { useIsFocused } from '@react-navigation/native';
@@ -15,14 +15,13 @@ const WalletCard = () => {
                 setName(fullName)
                 //  console.log('---', fullName)
             })
-    }, [isFocused]);
+    }, [isFocused]); 
     console.log(userBal);
 
     return (
-
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ borderWidth: 1, borderRadius: 12, height: 190, marginTop: 10, backgroundColor: "#3f46c8", width: '98%', borderColor: "#3f46c8" }}>
-                <Text style={{ color: 'white', fontSize: 30, margin: 35, fontWeight: '300', alignItems: 'center', marginTop: 34 }}>Hii {name}, </Text>
+                <Text style={{ color: 'white', fontSize: 30, margin: 35, fontWeight: '300', alignItems: 'center', marginTop: 34 }}>Hello  {name}, </Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ color: 'white', fontSize: 26, marginTop: 4, }}>Balance</Text>
@@ -31,11 +30,11 @@ const WalletCard = () => {
                     </View>
                 </View>
             </View>
-            <View>
-            </View>
+            <View> 
+            </View>   
         </View>
     )
-}
+} 
 
 export default WalletCard
 
@@ -48,6 +47,6 @@ const styles = StyleSheet.create({
         height: 221,
         shadowRadius: 11,
         borderBottomLeftRadius: 222,
-    }, 
+    },
 }
 )

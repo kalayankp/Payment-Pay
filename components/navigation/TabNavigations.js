@@ -33,7 +33,7 @@ const TabNavigations = () => {
           right: -1,
           left: -2,
           borderRadius: 18,
-          backgroundColor:'#3f46c8',
+          backgroundColor:'#3746c8',
         },
         style: {
           height: 90,
@@ -62,7 +62,7 @@ const TabNavigations = () => {
           tabBarLabel: '',
           showLabel: false,
           tabBarIcon: ({ color, size }) => (
-            <Image source={statement} style={{ width: '50%', height: "50%" }} />
+            <Image source={statement} style={{  height: 36,width:30 }} />
           )
         }}
       />

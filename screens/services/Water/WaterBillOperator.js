@@ -1,0 +1,113 @@
+
+import React, { useState, useEffect } from 'react'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native'
+import { REACT_APP_BASE_Bill_URL } from "@env";
+ 
+const WaterBillOperator = ({ navigation,route}) => {
+  const {macId,ipId} = route.params;
+  console.log('----',JSON.stringify(macId),JSON.stringify(ipId));
+  const [biller_ids, setBiller_ids] = useState('');
+  const [operator, setOperator] = useState('')
+  const [selectOperator,setSelectOperator]=useState('')
+  //1121  
+  console.log(biller_ids);
+ 
+  const getData = () => {
+    fetch(`${REACT_APP_BASE_Bill_URL}/getWaterBillerDetails`)
+      .then(res => res.json())
+      .then(data =>
+        //console.log(data),
+        setOperator(data.data)
+      ) 
+  }
+   
+  useEffect(() => {
+    getData()
+  }, [])
+
+  return (
+    <View>
+      <View style={{ backgroundColor: '#132fba', borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginLeft: 0.5, marginRight: 0.5 }}>
+        <View style={{ flexDirection: 'row', padding: 15, }}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              style={{ width: 25, height: 30, }}
+              source={require('../../../assests/images/leftArrow.png')}
+            />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '30%' }}>RingPe</Text>
+        </View>
+      </View>
+   
+      <View style={{ width: '100%', height: '4%', backgroundColor: '#E8E8E8' }}>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', color: "black", padding: 5,}}>Water Bill </Text>
+      </View>
+         {/* search bar */}
+      <View>
+        <View style={{ marginTop: '3%', justifyContent: "center", margin: 10, alignItems: 'center', borderWidth: 2, width: '90%', borderRadius: 20, borderColor: 'black', flexDirection: 'row', justifyContent: 'space-around' }}>
+          <TextInput placeholder='Search Bank Name' style={{ fontSize: 20, padding: 10, color: "black" }} />
+          <Image source={require('../../../assests/icons/images/zoom.png')} style={{ width: 22, height: 18, }} />
+        </View>
+        <View style={{ width: '100%', height: '1%', backgroundColor: '#E8E8E8' }}>
+        </View> 
+        </View>
+        
+          <View style={{ }}>
+            <Text style={{ marginTop: '0%', fontSize: 20, color: 'black', padding: 10, fontWeight: "500" }}>All Banks</Text>
+          </View>
+           
+      <View style={{marginTop:'-12%',backgroundColor:'#E8E8E8'}}>
+      <FlatList
+        data={operator}
+        setSelectOperator
+        renderItem={({ item }) => (
+          <View style={{marginTop:'1%',borderColor:'grey',backgroundColor:'white'}}>
+           <TouchableOpacity onPress={()=>{
+            setSelectOperator(item.biller_name)
+            setBiller_ids(item.biller_id)
+            navigation.navigate('WaterBillForm',{
+                "biilerId":item.biller_id,
+                'billerName':item.biller_name,
+                macId:macId,
+                ipId:ipId
+            })
+           }}>
+            <Text style={{color:'black',padding:'5%',fontSize:20}}>{item.biller_name}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      />
+      </View>
+ </View> 
+
+  )
+}
+
+const styles = StyleSheet.create({
+  dropdown: {
+    margin: 16,
+    height: 60,
+    fontWeight: 'bold'
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    color: 'grey'
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16, 
+  },
+  placeholderStyle: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'black'
+  }
+});
+
+
+
+export default WaterBillOperator

@@ -14,7 +14,7 @@ const MonthlyUsageCap = ({navigation}) => {
         </TouchableOpacity>
           <Text style={{fontSize:20,fontWeight:'bold',color:'black',marginTop:112,textAlign:'center'}}>SET LIMIT</Text>
       <View style={{marginTop:  112}}>
-      
+        
     <Slider
           maximumValue={20000}
           minimumValue={500}
