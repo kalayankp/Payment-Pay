@@ -11,11 +11,11 @@ const { name,amount,transferId,message,time } = route.params;
         <View style={{ flexDirection: 'row', padding: 15, }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
-              style={{ width: 25, height: 30, }}
+              style={{ width: 25, height: 32, }}
               source={require('../assests/images/leftArrow.png')}
             />
           </TouchableOpacity>
-          <Text style={{ fontSize: 20, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '33%' }}>RingPe</ Text>
+          <Text style={{ fontSize: 30, fontWeight: '400', justifyContent: 'center', textAlign: 'center', color: 'white', marginLeft: '33%' }}>RingPe</ Text>
         </View>
       </View>
       <View style={{ width: '100%', height: '8%', zIndex: -1,  backgroundColor: '#E8E8E8' }}>
